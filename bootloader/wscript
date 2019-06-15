@@ -431,6 +431,13 @@ def configure(ctx):
             # Load tool to process *.rc* files for C/C++ like icon for exe
             # files. For msvc waf loads this tool automatically
             ctx.find_program([assoc_programm(ctx, 'windres')], var='WINRC')
+            if ctx.env.WINRC:
+                # If we found windres we need to setup the target and source flags
+                # which would normally be setup by waf's winres.py. If we don't do
+                # this source and target files will be passed to windres in reverse
+                # order.
+                ctx.env.WINRC_TGT_F='-o'
+                ctx.env.WINRC_SRC_F='-i'
             ctx.load('winres')
 
     ### C Compiler optimizations.
