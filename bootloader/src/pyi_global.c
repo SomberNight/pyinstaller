@@ -190,7 +190,7 @@ mbvs(const char *fmt, ...)
     /* msg[MBTXTLEN-1] = '\0'; */
     va_end(args);
 
-    OutputDebugStringA(msg);
+    show_message_box(msg, "Tracing...", MB_ICONINFORMATION);
 }
     #endif /* if defined(_WIN32) && defined(WINDOWED) */
 #endif /* ifdef LAUNCH_DEBUG */
